@@ -104,6 +104,17 @@ function generatePassword () {
     }
 }
 
+// Bonus function to further randomize the generated password
+function randomize(str, arr) {
+  let arr1 = str.split('');
+  while (arr1.length !== 0) {
+    let randomIndex = Math.floor(Math.random() * arr1.length);
+    arr.push(arr1[randomIndex]);
+    arr1.splice(randomIndex, 1);
+  }
+  return arr.join('');
+}
+
 
 
 // Add event listener to generate button
