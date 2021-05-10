@@ -95,6 +95,12 @@ function generatePassword () {
           password += specialChar;
         }
       }
+
+    // Trim the password to make sure it's the specified length
+    password = password.substring(0, passwordLength);
+    console.log(`password: ${password}`);
+
+    return randomize(password, [])
     }
 }
 
