@@ -11,8 +11,6 @@ function writePassword() {
 
   passwordText.value = password;
 
-}
-
 function generatePassword () {
    // Store the password length
    const passwordLength = prompt(
@@ -59,10 +57,10 @@ function generatePassword () {
     }
 
     let password = '';
-    console.log('Lenght: ', Number(passwordLength));
 
-    for (i = 0; password.length < Number(passwordLength); i++) {
-      for (j = 0; j < charTypes.length; j++) {
+    for (let i = 0; password.length < Number(passwordLength); i++) {
+      for (let j = 0; j < charTypes.length; j++) {
+
         if (charTypes[j] === 'lowercase') {
           // Generate a string of lowercase alphanumeric characters
           let lowerString = Math.random().toString(36).slice(2);
@@ -94,14 +92,14 @@ function generatePassword () {
           // Add the special character to the current password
           password += specialChar;
         }
-      }
-
+      }     
+    }
     // Trim the password to make sure it's the specified length
     password = password.substring(0, passwordLength);
     console.log(`password: ${password}`);
 
     return randomize(password, [])
-    }
+ }
 }
 
 // Bonus function to further randomize the generated password
