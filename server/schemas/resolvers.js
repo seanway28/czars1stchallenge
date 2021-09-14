@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, job } = require('../models');
+const { User, Job } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -40,28 +40,28 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    savejob: async (parent, args, context) => {
+    saveJob: async (parent, args, context) => {
       if (context.user) {
           const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
               // $addToSet doesn't add the item if it already contains it
               //$push will add the given object to field whether it exists or not
-              { $addToSet: { savedjobs: args.job } },
+              { $addToSet: { savedJobs: args.job } },
               { new: true }
-          ).populate('savedjobs');
+          ).populate('savedJobs');
 
           return updatedUser;
       }
 
       throw new AuthenticationError('Need to be logged in to add a job to your list');
   },
-  removejob: async (parent, args, context) => {
+  removeJob: async (parent, args, context) => {
       if (context.user) {
           const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $pull: { savedjobs: { jobId: args.jobId } } },
+              { $pull: { savedJobs: { jobId: args.jobId } } },
               { new: true }
-          ).populate('savedjobs');
+          ).populate('savedJobs');
           
           return updatedUser;
       }

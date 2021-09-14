@@ -2,10 +2,10 @@ const faker = require('faker');
 
 const db = require('../config/connection');
 const { User } = require('../models/User');
-const { job } = require('../models/job');
+const { Job } = require('../models/Job');
 
 db.once('open', async () => {
-  await job.deleteMany({});
+  await Job.deleteMany({});
   await User.deleteMany({});
 
   // create user data
@@ -23,21 +23,21 @@ db.once('open', async () => {
 
 
   // create jobss
-  let createdjobs = [];
+  let createdJobs = [];
   for (let i = 0; i < 100; i += 1) {
     const jobText = faker.lorem.words(Math.round(Math.random() * 10) + 1);
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
 
-    const createdjob = await job.create({ jobText, username });
+    const createdJob = await Job.create({ jobText, username });
 
     const updatedUser = await User.updateOne(
       { _id: userId },
-      { $push: { jobs: createdjob._id } }
+      { $push: { jobs: createdJob._id } }
     );
 
-    createdjobs.push(createdjob);
+    createdJobs.push(createdJob);
   }
 
   console.log('all done!');
