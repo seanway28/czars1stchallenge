@@ -6,9 +6,9 @@ const typeDefs = gql`
     username: String
     email: String
     jobCount: Int
-    savedjobs: [job]
+    savedJobs: [Job]
   }
-  type job {
+  type Job {
     _id: ID
     jobId: String
     authors: [String]
@@ -36,8 +36,8 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    savejob( job: jobSaving): User
-    removejob (jobId: String!): User
+    saveJob( job: jobSaving): User
+    removeJob (jobId: String!): User
   }
 `;
 
