@@ -11,7 +11,7 @@ ReactDOM.render(
     </React.StrictMode>,
   document.getElementById('root'));
 
-  export default function Indeed(url = 'http://api.indeed.com/ads', publisherId) {
+  export default function Indeed(url = 'http://api.indeed.com/', publisherId) {
   if (!publisherId) {
     throw Error('An Indeed publisher id is required');
   } else {
